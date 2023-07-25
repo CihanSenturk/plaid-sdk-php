@@ -11,7 +11,7 @@
         "php": ">=7.3|>=8.0",
         "ext-json": "*",
         "ext-curl": "*",
-        "nimbly/shuttle": "^0.4"
+        "nimbly/shuttle": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,6 +34,10 @@
         {
             "name": "Brent Scheffler",
             "email": "brent@brentscheffler.com"
+        },
+        {
+            "name": "Cihan Senturk",
+            "email": "cihansenturk96@gmail.com"
         }
     ]
 }
