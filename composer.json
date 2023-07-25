@@ -1,5 +1,5 @@
 {
-    "name": "tomorrow-ideas/plaid-sdk-php",
+    "name": "CihanSenturk/plaid-sdk-php",
     "description": "PHP implementation of Plaid's API as an SDK.",
     "keywords": [
         "plaid",
@@ -29,6 +29,7 @@
             "TomorrowIdeas\\Plaid\\Tests\\": "tests"
         }
     },
+    "homepage": "https://github.com/CihanSenturk/plaid-sdk-php",
     "license": "MIT",
     "authors": [
         {
