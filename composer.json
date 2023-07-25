@@ -1,5 +1,5 @@
 {
-    "name": "CihanSenturk/plaid-sdk-php",
+    "name": "cihansenturk/plaid-sdk-php",
     "description": "PHP implementation of Plaid's API as an SDK.",
     "keywords": [
         "plaid",
