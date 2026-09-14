@@ -24,6 +24,10 @@ class Tokens extends AbstractResource
 	 * @param string|null $android_package_name
 	 * @param string|null $payment_id
 	 * @param string|null $institution_id
+	 * @param int|null $transactions_days_requested How many days of transaction history Plaid
+	 *        should request from the institution when the Transactions product is initialized
+	 *        on the Item. Default on Plaid's side is 90, the maximum is 730, and the value
+	 *        cannot be changed once the Item has been created.
 	 * @throws PlaidRequestException
 	 * @return object
 	 */
@@ -40,7 +44,8 @@ class Tokens extends AbstractResource
 		?string $redirect_uri = null,
 		?string $android_package_name = null,
 		?string $payment_id = null,
-		?string $institution_id = null): object {
+		?string $institution_id = null,
+		?int $transactions_days_requested = null): object {
 
 		$params = [
 			"client_name" => $client_name,
@@ -82,6 +87,12 @@ class Tokens extends AbstractResource
 
 		if( $institution_id ){
 			$params["institution_id"] = $institution_id;
+		}
+
+		if( $transactions_days_requested ){
+			$params["transactions"] = [
+				"days_requested" => $transactions_days_requested
+			];
 		}
 
 		return $this->sendRequest(
