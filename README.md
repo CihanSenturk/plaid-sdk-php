@@ -29,7 +29,7 @@ For full description of request and response payloads and properties, please see
 
 ## Requirements
 
-* PHP 8.2+
+* PHP 8.0+
 * ext-curl
 * ext-json
 
