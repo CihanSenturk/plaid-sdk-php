@@ -196,6 +196,44 @@ class TokensTest extends TestCase
 		$this->assertEquals("institution_id", $response->params->institution_id);
 	}
 
+	public function test_transactions_days_requested(): void
+	{
+		$response = $this->getPlaidClient()->tokens->create(
+			"client_name",
+			"en",
+			["US"],
+			new User("usr_12345"),
+			["transactions"],
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			730
+		);
+
+		$this->assertEquals(
+			(object) ["days_requested" => 730],
+			$response->params->transactions
+		);
+	}
+
+	public function test_transactions_days_requested_is_omitted_by_default(): void
+	{
+		$response = $this->getPlaidClient()->tokens->create(
+			"client_name",
+			"en",
+			["US"],
+			new User("usr_12345"),
+			["transactions"]
+		);
+
+		$this->assertFalse(\property_exists($response->params, "transactions"));
+	}
+
 	public function test_get_token(): void
 	{
 		$response = $this->getPlaidClient()->tokens->get("link_token");
