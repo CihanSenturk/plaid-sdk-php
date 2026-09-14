@@ -1,9 +1,9 @@
 # Plaid SDK
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/tomorrow-ideas/plaid-sdk-php.svg?style=flat-square)](https://packagist.org/packages/tomorrow-ideas/plaid-sdk-php)
+[![Latest Stable Version](https://img.shields.io/packagist/v/cihansenturk/plaid-sdk-php.svg?style=flat-square)](https://packagist.org/packages/cihansenturk/plaid-sdk-php)
 [![Build Status](https://img.shields.io/travis/TomorrowIdeas/plaid-sdk-php.svg?style=flat-square)](https://travis-ci.com/TomorrowIdeas/plaid-sdk-php)
 [![Code Coverage](https://img.shields.io/coveralls/github/TomorrowIdeas/plaid-sdk-php.svg?style=flat-square)](https://coveralls.io/github/TomorrowIdeas/plaid-sdk-php)
-[![License](https://img.shields.io/github/license/TomorrowIdeas/plaid-sdk-php.svg?style=flat-square)](https://packagist.org/packages/tomorrow-ideas/plaid-sdk-php)
+[![License](https://img.shields.io/github/license/CihanSenturk/plaid-sdk-php.svg?style=flat-square)](https://packagist.org/packages/cihansenturk/plaid-sdk-php)
 
 Plaid PHP SDK supporting:
 * Link tokens
@@ -29,14 +29,14 @@ For full description of request and response payloads and properties, please see
 
 ## Requirements
 
-* PHP 7.3+ | PHP 8.0+
+* PHP 8.2+
 * ext-curl
 * ext-json
 
 ## Installation
 
 ```bash
-composer require tomorrow-ideas/plaid-sdk-php
+composer require cihansenturk/plaid-sdk-php
 ```
 
 ## Configuration
@@ -242,7 +242,9 @@ create(string $client_name,
 	?string $access_token = null,
 	?string $redirect_url = null,
 	?string $android_package_name = null,
-	?string $payment_id = null): object
+	?string $payment_id = null,
+	?string $institution_id = null,
+	?int $transactions_days_requested = null): object
 ```
 
 `get(string $link_token): object`
@@ -251,6 +253,27 @@ Example:
 ```php
 $token = $plaid->tokens->create($client_name, $language, ["US","CA"], $user_id);
 ```
+
+#### Transaction history window
+
+When the `transactions` product is initialized on an Item, Plaid requests **90 days** of
+transaction history by default. Pass `$transactions_days_requested` to ask for a different
+window (maximum **730** days):
+
+```php
+$token = $plaid->tokens->create(
+	$client_name,
+	$language,
+	["US", "CA"],
+	$user,
+	["transactions"],
+	transactions_days_requested: 730
+);
+```
+
+This value is sent as `transactions.days_requested` and **cannot be changed once the Item has
+been created**, so request the full window you need up front. Omitting the argument leaves the
+payload untouched and Plaid's 90 day default applies.
 
 ### Liabilities
 
